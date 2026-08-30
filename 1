@@ -1,36 +1,124 @@
-const pages = document.querySelectorAll('.page');
-const navigation = document.querySelectorAll('[data-page]');
-const navLinks = document.querySelectorAll('.nav-link');
-const menu = document.querySelector('.main-nav');
-const toggle = document.querySelector('.menu-toggle');
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#352218" />
+    <title>Astral Objections</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <div class="page-frame" aria-hidden="true"></div>
 
-function showPage(id) {
-  pages.forEach((page) => page.classList.toggle('active', page.id === id));
-  navLinks.forEach((link) => link.classList.toggle('active', link.dataset.page === id));
-  document.body.classList.toggle('contact-mode', id === 'contact');
-  menu.classList.remove('open');
-  toggle.setAttribute('aria-expanded', 'false');
-}
+    <header class="site-header">
+      <button class="seal" aria-label="Return home" data-page="home"><span>AO</span></button>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <i></i><i></i>
+      </button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link active" data-page="home">Home</button>
+        <button class="nav-link" data-page="about">About me</button>
+        <button class="nav-link" data-page="work">My work</button>
+        <button class="nav-link" data-page="contact">Contact</button>
+      </nav>
+    </header>
 
-navigation.forEach((item) => item.addEventListener('click', () => showPage(item.dataset.page)));
-toggle.addEventListener('click', () => {
-  const isOpen = menu.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', isOpen);
-});
+    <main>
+      <section class="page active home-page" id="home" aria-label="Home">
+        <div class="home-ornament left-ornament" aria-hidden="true">
+          <span class="star star-one">✦</span><span class="star star-two">✧</span>
+          <div class="orb"></div>
+          <div class="laurel left"></div>
+        </div>
+        <div class="starfield" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="constellation constellation-one" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="constellation constellation-two" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="hero-title">
+          <h1>Astral<br /><em>Objections</em></h1>
+          <div class="title-rule"><span>✦</span></div>
+          <p class="home-intro">An archive of my written work</p>
+        </div>
+        <div class="home-ornament right-ornament" aria-hidden="true">
+          <span class="star star-three">✦</span><span class="star star-four">✧</span>
+          <div class="moon"><span></span></div>
+          <div class="laurel right"></div>
+        </div>
+        <div class="home-corner top-left" aria-hidden="true"></div>
+        <div class="home-corner bottom-right" aria-hidden="true"></div>
+        <button class="scroll-hint" data-page="about" aria-label="Explore the site"><span>Explore</span><i>↓</i></button>
+      </section>
 
-document.querySelectorAll('.upload-card input').forEach((input) => {
-  input.addEventListener('change', () => {
-    const list = input.closest('.archive-shelf').querySelector('.file-list');
-    Array.from(input.files).forEach((file) => {
-      const item = document.createElement('a');
-      item.className = 'file-entry';
-      item.href = URL.createObjectURL(file);
-      item.target = '_blank';
-      item.rel = 'noreferrer';
-      item.title = 'Open ' + file.name;
-      item.textContent = file.name;
-      list.appendChild(item);
-    });
-    input.value = '';
-  });
-});
+      <section class="page interior-page" id="about" aria-label="About me">
+        <div class="column column-left" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="interior-content">
+          <p class="section-number">I.</p>
+          <h2>About <em>me</em></h2>
+          <div class="about-copy">
+            <p>I was born on the 14th of September 2007 and have been writing for as long as I can remember.</p>
+            <p>I’m a law student living in London.</p>
+            <p>I moved to England when I was 13, and that experience has shaped a lot of who I am. Much of my work comes from navigating life as a teenage immigrant.</p>
+            <p>I love psychological thrillers, literary crime, gothic mysteries, and nonfiction novels.</p>
+            <p>I also enjoy Indian food, ’70s rock, and political conversations with people who actually have something interesting to say.</p>
+          </div>
+          <p class="angel-number">777</p>
+          <div class="tiny-constellation" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="column column-right" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </section>
+
+      <section class="page work-page" id="work" aria-label="My work">
+        <div class="work-header"><p class="section-number">II.</p><h2>My <em>work</em></h2></div>
+        <div class="work-grid">
+          <button class="work-card" data-page="main-projects"><span>01</span><strong>Main<br />projects</strong><i>↗</i></button>
+          <button class="work-card" data-page="fiction"><span>02</span><strong>Fiction</strong><i>↗</i></button>
+          <button class="work-card" data-page="research"><span>03</span><strong>Research<br />&amp; studies</strong><i>↗</i></button>
+          <button class="work-card" data-page="essays"><span>04</span><strong>Essays</strong><i>↗</i></button>
+        </div>
+        <div class="arch-line" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="ink-spill work-spill" aria-hidden="true"><i></i><i></i><i></i></div>
+      </section>
+
+      <section class="page archive-page" id="main-projects" aria-label="Main projects">
+        <div class="archive-heading"><button class="back-button" data-page="work">← &nbsp; My work</button><p class="section-number">01.</p><h2>Main <em>projects</em></h2></div>
+        <div class="archive-shelf"><label class="upload-card"><input type="file" multiple accept=".txt,.pdf,.doc,.docx,.rtf,.odt" /><span>+</span><strong>Add work</strong><small>Text, PDF or document</small></label><div class="file-list" aria-live="polite"></div></div>
+        <div class="archive-pillar" aria-hidden="true"></div><div class="ink-spill archive-spill" aria-hidden="true"><i></i><i></i></div>
+      </section>
+      <section class="page archive-page" id="fiction" aria-label="Fiction">
+        <div class="archive-heading"><button class="back-button" data-page="work">← &nbsp; My work</button><p class="section-number">02.</p><h2>Fiction</h2></div>
+        <div class="archive-shelf"><label class="upload-card"><input type="file" multiple accept=".txt,.pdf,.doc,.docx,.rtf,.odt" /><span>+</span><strong>Add work</strong><small>Text, PDF or document</small></label><div class="file-list" aria-live="polite"></div></div>
+        <div class="archive-pillar" aria-hidden="true"></div><div class="ink-spill archive-spill" aria-hidden="true"><i></i><i></i></div>
+      </section>
+      <section class="page archive-page" id="research" aria-label="Research and studies">
+        <div class="archive-heading"><button class="back-button" data-page="work">← &nbsp; My work</button><p class="section-number">03.</p><h2>Research <em>&amp; studies</em></h2></div>
+        <div class="archive-shelf"><label class="upload-card"><input type="file" multiple accept=".txt,.pdf,.doc,.docx,.rtf,.odt" /><span>+</span><strong>Add work</strong><small>Text, PDF or document</small></label><div class="file-list" aria-live="polite"></div></div>
+        <div class="archive-pillar" aria-hidden="true"></div><div class="ink-spill archive-spill" aria-hidden="true"><i></i><i></i></div>
+      </section>
+      <section class="page archive-page" id="essays" aria-label="Essays">
+        <div class="archive-heading"><button class="back-button" data-page="work">← &nbsp; My work</button><p class="section-number">04.</p><h2>Essays</h2></div>
+        <div class="archive-shelf"><label class="upload-card"><input type="file" multiple accept=".txt,.pdf,.doc,.docx,.rtf,.odt" /><span>+</span><strong>Add work</strong><small>Text, PDF or document</small></label><div class="file-list" aria-live="polite"></div></div>
+        <div class="archive-pillar" aria-hidden="true"></div><div class="ink-spill archive-spill" aria-hidden="true"><i></i><i></i></div>
+      </section>
+
+      <section class="page interior-page contact-page" id="contact" aria-label="Contact">
+        <div class="contact-orbit" aria-hidden="true"><i></i><i></i><i></i><b>✦</b></div>
+        <div class="interior-content">
+          <p class="section-number">III.</p>
+          <h2>Say <em>hello</em></h2>
+          <div class="contact-details"><a href="https://www.instagram.com/astralobjections/" target="_blank" rel="noreferrer">Instagram · @astralobjections</a><a href="mailto:ameliakida3@gmail.com">ameliakida3@gmail.com</a></div>
+        </div>
+        <div class="sunburst" aria-hidden="true"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><span>EST. 2026</span><span>✦</span><span>ASTRAL OBJECTIONS</span></footer>
+    <script src="script.js"></script>
+  </body>
+</html>
