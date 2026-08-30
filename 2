@@ -1,0 +1,36 @@
+const pages = document.querySelectorAll('.page');
+const navigation = document.querySelectorAll('[data-page]');
+const navLinks = document.querySelectorAll('.nav-link');
+const menu = document.querySelector('.main-nav');
+const toggle = document.querySelector('.menu-toggle');
+
+function showPage(id) {
+  pages.forEach((page) => page.classList.toggle('active', page.id === id));
+  navLinks.forEach((link) => link.classList.toggle('active', link.dataset.page === id));
+  document.body.classList.toggle('contact-mode', id === 'contact');
+  menu.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+}
+
+navigation.forEach((item) => item.addEventListener('click', () => showPage(item.dataset.page)));
+toggle.addEventListener('click', () => {
+  const isOpen = menu.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', isOpen);
+});
+
+document.querySelectorAll('.upload-card input').forEach((input) => {
+  input.addEventListener('change', () => {
+    const list = input.closest('.archive-shelf').querySelector('.file-list');
+    Array.from(input.files).forEach((file) => {
+      const item = document.createElement('a');
+      item.className = 'file-entry';
+      item.href = URL.createObjectURL(file);
+      item.target = '_blank';
+      item.rel = 'noreferrer';
+      item.title = 'Open ' + file.name;
+      item.textContent = file.name;
+      list.appendChild(item);
+    });
+    input.value = '';
+  });
+});
